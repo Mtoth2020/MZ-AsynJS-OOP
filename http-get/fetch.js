@@ -1,10 +1,14 @@
-const getPosts = function() {
-    return fetch('https://jsonplaceholder.typicode.com/posts')
-        .then(response => {
-            if (!response.ok) throw Error(response.statusText);
-            else return response.json();
-        })
+const getUsers = async () => {
+    try {
+        const response = await fetch('https://jsonplaceholder.typicode.com/users');
+        const data = await response.json();
+        console.log("users", data);
+    } catch (e) {
+        console.log("getting users was not successful", e);
+    }
 }
 
+getUsers();
 
-export { getPosts };
+
+

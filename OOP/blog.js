@@ -1,5 +1,4 @@
 export { Blog };
-import {getPosts} from "../http-get/fetch.js";
 
 class Blog {
     #title;
@@ -17,7 +16,12 @@ class Blog {
     }
 
     #fetchPosts() {
-        getPosts().then(data => {
+        return fetch('https://jsonplaceholder.typicode.com/posts')
+            .then(response => {
+                if (!response.ok) throw Error(response.statusText);
+                else return response.json();
+            })
+            .then(data => {
                 this.#posts = data;
             });
     }
